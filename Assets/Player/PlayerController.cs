@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
 	[Tooltip("Rotation sensitivity. Increase for snappier rotation.")]
 	public float rotationSpeed = 5f;
 
+	[Header("UI elements")]
+	[Tooltip("Reference to the canvas object.")]
+	public Canvas canvas;
+
 	// Internal accumulators for rotation
 	private float yaw = 0f;
 	private float pitch = 0f;
@@ -74,5 +78,15 @@ public class PlayerController : MonoBehaviour
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = true;
 		}
+
+		// --- Canvas Toggle (only when Tab is pressed) ---
+		if(Input.GetKeyDown(KeyCode.Tab))
+			ToggleCanvas();
+	}
+
+	private void ToggleCanvas()
+	{
+		// Toggle the canvas visibility
+		canvas.enabled = !canvas.enabled;
 	}
 }

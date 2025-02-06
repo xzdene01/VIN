@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DarkSkin
   m_EditorClassIdentifier: 
   m_font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  m_fontSize: 7
-  m_lineHeight: 12
+  m_fontSize: 8
+  m_lineHeight: 14
   m_indentAmount: 0
   m_labelWidthPercentage: 0.4
   m_expandArrowSpacing: 5
