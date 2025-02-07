@@ -82,6 +82,8 @@ The demo itself can compile shaders for you, meaning it will download and spawn 
 6. Console will close itself
 7. Try out your new shaders!
 
+**Afetr running the demo delete the folder withraw shader, or it will be compiled again !!!**
+
 ### Other way
 
 Sadly I have not found a better way to use custom user-defined shaders in my game. If you have any ideas please let me know and I will gladly implemet them.
