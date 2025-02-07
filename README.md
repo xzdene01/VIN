@@ -12,6 +12,12 @@ This is a small demo that showcases both procedural Perlin noise generation and 
 
 If you only want to run this app, you can simply download the desired version from itch.io (<https://xzdene01.itch.io/vin-demo>). The entire application was developed and tested on a Windows 11 64-bit machine, but additional binaries are available, so feel free to try those or even build from source by cloning this repository.
 
+## Requirements
+
+- Preferable **Windows 11 64-bit** machine with **Intel** processor - this was used for testing and development
+- **Unity Hub/Editor** - needed for building from source or modifying the code
+- **Docker** - needed for custom shader compilation (developed tool runs in docker with Unity Editor)
+
 ## Installation
 
 If you want to integrate this game into the Unity Editor, simply clone this repository and import it using the Unity Hub interface. The original version of the Unity Editor is **6000.0.36f1**. Detailed instructions are as follows:
@@ -33,24 +39,49 @@ This demo is straightforward to control, so no external manual is required. The 
 
 ## Shaders
 
-Unfortunately Unity does not allow on-the-fly shader compilation, so you will either need to clone this repository and compile shaders alongside the game or you will need to use external tools like the one i created. Before creating any shaders it is recommended to look at the shader in *Examples* folder in the root of this GitHub repository.
+Unfortunately Unity does not allow on-the-fly shader compilation, so you will either need to clone this repository and compile shaders alongside the game or you will need to use external tools like the one i created.
 
-### Cloning the repo (**recommended** but must be used within Unity Editor)
+Before writing any shaders look inside *Examples* folder in this repo, there are some raw shaders as inspiration or even already pre-compiled shaders that are ready to use.
+
+### Cloning the repo (**requires Unity Editor**)
 
 If you wanna choose this method just follow steps from *Installation* part of this README and than paste your custom shaders into *Assets/Shaders*. Than just drag and drop tha shader onto the *PerlinGenerator* script. You can now try your shader right in the editor.
 
-### Using external tool (can be used despite not having Unity Editor)
+### Using pre-build shaders (**No requirements**)
+
+Inside the *Examples/CompiledShader* folder are some example shaders you can use rigth away. They are bundeled inside AssetBundles so they can be loaded in runtime (loading is done every 5 seconds so always wait a bit). Importing of compiled shaders:
+
+1. Copy the *Examples/CompiledShaders* into build directory (directory with binary)
+2. Rename the folder to *Data*
+3. Try out custom shaders!
+
+This whole process can be done during runtime.
+
+### Using external tool (**Requires Docker**)
 
 Detailed instructions on how to compile custom shaders using my tool are on Docker Hub <https://hub.docker.com/r/xzdene01/unity-shader-builder>. Firstly you will need to download the prepared image, secondly you will be able to compile shaders using Unity Editor encapsulated inside docker container. This process is pretty long (especially the first time when the image needs to be downloaded) so i recommend compiling multiple shaders at once.
 
-After compiling shaders and getting the *shaders* file (AssetsBundle file), you just create a new folder in the root of build directory (where the binary is). It is important to name this folder *Data*. Everything in this folder will be loaded during runtime and therefore can be used both in editor and when running the actual build.
+Compiling and importing custom shaders:
 
-### Using own shaders
+1. Compile all your shaders using the above mentioned tool
+2. Create (if not already created) a folder *Data* inside your build directory (directory with binary)
+3. Paste all compiled shaders inside *Data* folder
+4. Try out your custom shaders in-game!
 
-If you wanna use you own AssetBundled shaders you absolutely can! You put them into the previously mentioned *Data* folder and they will be available from the in-game interface.
+If you have already compiled shaders you can skip the first instruction.
 
-**Do not forget to restart the game after putting in new compiled shaders**
+### Automatic compilation (**Requires Docker**)
+
+The demo itself can compile shaders for you, meaning it will download and spawn a docker container, that will automatically compile all shaders inside pre-defined folder. Step-by-step instructions:
+
+1. Create folder named *Raw* inside your build directory (directory containing the binary)
+2. Place your raw shaders inside this folder (**only .shader Unity style shaders supported**)
+3. Run the demo (double-click the binary)
+4. Console should spawn and image should start downloading (if not downloaded before)
+5. Container should start and compile all shaders
+6. Console will close itself
+7. Try out your new shaders!
 
 ### Other way
 
-Sadly I have not found a better way to use custom user-defined shaders in my game. If you have any ideas feel free to contact me.
+Sadly I have not found a better way to use custom user-defined shaders in my game. If you have any ideas please let me know and I will gladly implemet them.
